@@ -544,7 +544,18 @@ jobs:
             reports/
             logs/
           retention-days: 30
-      
+
+      - name: Сохранить отчет в репозиторий
+        if: always()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add reports/
+          git commit -m "Автоматический отчет за $(date +'%Y-%m-%d')" || echo "Нет изменений для коммита"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: 显示运行结果
         if: always()
         run: |
