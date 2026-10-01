@@ -550,7 +550,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add reports/
+          git add -f reports/
           git commit -m "Автоматический отчет за $(date +'%Y-%m-%d')" || echo "Нет изменений для коммита"
           git push
         env:
